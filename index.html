@@ -1,386 +1,95 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ManualAid | Pet Care Reference Library</title>
-    <meta name="description" content="ManualAid is an organized pet care reference library for cat, dog, and other small pet owners. Educational guidance for common urgent situations." />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://manualaid.com/" />
-
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: #f7f9fa;
-            color: #1f2d2a;
-            line-height: 1.5;
-        }
-
-        .site {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        /* Top Bar */
-        .topbar {
-            background-color: #254d3b;
-            color: #ffffff;
-            padding: 14px 32px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .brand {
-            font-size: 20px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-
-        .topbar nav a {
-            color: #ffffff;
-            text-decoration: none;
-            margin-left: 24px;
-            font-size: 14px;
-            opacity: 0.85;
-        }
-
-        .topbar nav a:hover {
-            opacity: 1;
-            text-decoration: underline;
-        }
-
-        /* Main Layout */
-        .main-layout {
-            display: grid;
-            grid-template-columns: 240px 1fr;
-            gap: 28px;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 24px;
-            width: 100%;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            background-color: #ffffff;
-            border: 1px solid #e3e9e6;
-            border-radius: 14px;
-            padding: 22px;
-            height: fit-content;
-        }
-
-        .sidebar h3 {
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #254d3b;
-            margin-bottom: 14px;
-        }
-
-        .sidebar ul {
-            list-style: none;
-        }
-
-        .sidebar ul li {
-            margin-bottom: 10px;
-        }
-
-        .sidebar ul li a {
-            color: #354942;
-            text-decoration: none;
-            font-size: 14px;
-            display: block;
-            padding: 9px 10px;
-            border-radius: 8px;
-        }
-
-        .sidebar ul li a:hover {
-            background-color: #eef4f0;
-            color: #254d3b;
-        }
-
-        /* Content */
-        .content {
-            background-color: #ffffff;
-            border: 1px solid #e3e9e6;
-            border-radius: 14px;
-            padding: 36px;
-        }
-
-        .content-header {
-            margin-bottom: 28px;
-        }
-
-        .content-header h1 {
-            font-size: 34px;
-            color: #254d3b;
-            margin-bottom: 10px;
-        }
-
-        .content-header p {
-            color: #4f635c;
-            font-size: 17px;
-            max-width: 720px;
-        }
-
-        /* Category Grid */
-        .category-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 22px;
-            margin-top: 28px;
-        }
-
-        .category-card {
-            border: 1px solid #e3e9e6;
-            border-radius: 14px;
-            padding: 26px;
-            background-color: #fbfcfb;
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
-        }
-
-        .category-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(37, 77, 59, 0.12);
-        }
-
-        .category-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            background-color: #254d3b;
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            margin-bottom: 16px;
-        }
-
-        .category-card h2 {
-            font-size: 22px;
-            color: #254d3b;
-            margin-bottom: 10px;
-        }
-
-        .status-live {
-            display: inline-block;
-            background-color: #254d3b;
-            color: #ffffff;
-            font-size: 12px;
-            padding: 4px 10px;
-            border-radius: 999px;
-            margin-left: 10px;
-            vertical-align: middle;
-        }
-
-        .status-soon {
-            display: inline-block;
-            background-color: #b5c0bc;
-            color: #ffffff;
-            font-size: 12px;
-            padding: 4px 10px;
-            border-radius: 999px;
-            margin-left: 10px;
-            vertical-align: middle;
-        }
-
-        .category-card p {
-            color: #4f635c;
-            font-size: 14px;
-            margin-bottom: 18px;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: #254d3b;
-            color: #ffffff;
-            text-decoration: none;
-            padding: 11px 18px;
-            border-radius: 10px;
-            font-size: 14px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background-color: #1b3b2d;
-        }
-
-        .btn-soon {
-            background-color: #b5c0bc;
-            cursor: default;
-            pointer-events: none;
-        }
-
-        .btn-soon:hover {
-            background-color: #b5c0bc;
-        }
-
-        /* Update Module */
-        .update-module {
-            margin-top: 32px;
-            background-color: #eef4f0;
-            border-left: 4px solid #254d3b;
-            border-radius: 12px;
-            padding: 20px 22px;
-        }
-
-        .update-module h3 {
-            font-size: 16px;
-            color: #254d3b;
-            margin-bottom: 8px;
-        }
-
-        .update-module p {
-            color: #354942;
-            font-size: 14px;
-        }
-
-        /* Footer */
-        .site-footer {
-            background-color: #254d3b;
-            color: #ffffff;
-            padding: 32px 24px;
-            margin-top: 48px;
-        }
-
-        .footer-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer-inner h3 {
-            font-size: 18px;
-            margin-bottom: 12px;
-        }
-
-        .disclaimer {
-            font-size: 13px;
-            line-height: 1.6;
-            color: #d7e4dd;
-            background-color: rgba(0, 0, 0, 0.18);
-            border-radius: 10px;
-            padding: 16px;
-        }
-
-        /* Responsive */
-        @media (max-width: 820px) {
-            .main-layout {
-                grid-template-columns: 1fr;
-            }
-
-            .content-header h1 {
-                font-size: 28px;
-            }
-
-            .topbar {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .topbar nav a {
-                margin: 0 12px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ManualAid | Digital Template Resources</title>
+<meta name="description" content="Shop affordable editable digital templates for job applications and more. Download ready-to-use Word documents instantly after purchase.">
+<link rel="canonical" href="https://manualaid.com">
+<meta property="og:title" content="ManualAid | Digital Template Resources">
+<meta property="og:description" content="Shop affordable editable digital templates for job applications and more. Download ready-to-use Word documents instantly after purchase.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://manualaid.com">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial, sans-serif;}
+body{line-height:1.6;color:#222;background:#f7f9fa;}
+.container{max-width:1100px;margin:0 auto;padding:20px;}
+.hero{text-align:center;padding:60px 20px 40px;}
+.hero h1{font-size:36px;color:#1a2b48;margin-bottom:16px;}
+.hero p{font-size:18px;color:#444;max-width:700px;margin:0 auto 24px;}
+.product-section{padding:20px 0 50px;}
+.section-title{font-size:28px;text-align:center;margin-bottom:36px;color:#1a2b48;}
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(280px,1fr));gap:24px;}
+.product-card{background:#fff;border-radius:12px;box-shadow:0 2px 12px #00000010;padding:24px;}
+.product-card h3{font-size:22px;margin-bottom:10px;color:#1a2b48;}
+.product-card .price{font-size:22px;font-weight:bold;color:#207539;margin:12px 0;}
+.product-card p{color:#444;margin-bottom:18px;}
+.product-card a{display:inline-block;background:#2563eb;color:#fff;padding:12px 22px;border-radius:8px;text-decoration:none;font-weight:bold;}
+.product-card a:hover{background:#1d4ed8;}
+.faq-section{padding:40px 0;}
+.faq-item{background:#fff;padding:20px;border-radius:10px;margin-bottom:16px;}
+.faq-item h3{margin-bottom:8px;color:#253b63;}
+.disclaimer{background:#fff3cd;padding:18px;border-radius:8px;margin:40px 0;font-size:15px;}
+footer{margin-top:50px;padding-top:24px;border-top:1px solid #ddd;font-size:14px;color:#555;text-align:center;}
+footer a{color:#2563eb;text-decoration:none;margin:0 8px;}
+</style>
 </head>
 <body>
-    <div class="site">
-        <!-- Top Bar -->
-        <header class="topbar">
-            <div class="brand">ManualAid</div>
-            <nav>
-                <a href="https://manualaid.com/">Home</a>
-                <a href="https://cat.manualaid.com/" target="_blank">Cats</a>
-                <a href="#dogs">Dogs</a>
-                <a href="#other-pets">Other Pets</a>
-            </nav>
-        </header>
+<div class="container">
+    <section class="hero">
+        <h1>ManualAid — Digital Template Resources</h1>
+        <p>Affordable, ready-to-edit digital templates to save your time. Instant download after successful payment.</p>
+    </section>
 
-        <!-- Main Content -->
-        <div class="main-layout">
-            <!-- Sidebar -->
-            <aside class="sidebar">
-                <h3>Topics</h3>
-                <ul>
-                    <li><a href="https://cat.manualaid.com/" target="_blank">Cat Emergencies</a></li>
-                    <li><a href="#dogs">Dog Emergencies</a></li>
-                    <li><a href="#other-pets">Small Pets</a></li>
-                    <li><a href="#safety">Safety Checklist</a></li>
-                    <li><a href="#medication">Medication Notes</a></li>
-                    <li><a href="#updates">Updates</a></li>
-                </ul>
-            </aside>
-
-            <!-- Content Area -->
-            <main class="content">
-                <div class="content-header">
-                    <h1>Pet Care Reference Library</h1>
-                    <p>Organized by animal category. Find practical guidance quickly when you need it.</p>
-                </div>
-
-                <div class="category-grid">
-                    <!-- Cats -->
-                    <section class="category-card">
-                        <div class="category-icon">🐱</div>
-                        <h2>Cats <span class="status-live">Live</span></h2>
-                        <p>Access the cat emergency reference guide. Learn recommended first steps and when to see a veterinarian.</p>
-                        <a class="btn" href="https://cat.manualaid.com" target="_blank">View Cat Guide</a>
-                    </section>
-
-                    <!-- Dogs -->
-                    <section class="category-card" id="dogs">
-                        <div class="category-icon">🐶</div>
-                        <h2>Dogs <span class="status-soon">Coming Soon</span></h2>
-                        <p>Dog emergency guidance is under development. Future topics may include injury, poisoning, choking, and urgent care steps.</p>
-                        <span class="btn btn-soon">Coming Soon</span>
-                    </section>
-
-                    <!-- Other Pets -->
-                    <section class="category-card" id="other-pets">
-                        <div class="category-icon">🐰</div>
-                        <h2>Other Pets <span class="status-soon">Coming Soon</span></h2>
-                        <p>Future resources for rabbits, birds, hamsters, reptiles, fish, and other companion animals.</p>
-                        <span class="btn btn-soon">Coming Soon</span>
-                    </section>
-                </div>
-
-                <!-- Update Module -->
-                <div class="update-module" id="updates">
-                    <h3>Next: Dog Section</h3>
-                    <p>The cat guide is currently live. The dog section and additional small pet categories will be added after testing and review.</p>
-                </div>
-            </main>
-        </div>
-<hr>
-<h2>Privacy Policy</h2>
-<p>Last updated: September 2026</p>
-<p>We collect your email and payment information only to process your purchase and deliver your guide. We do not sell your personal data to third parties. Payment processing is handled by Creem. We store only necessary order information. You may contact us at nbazen@gmail.com for privacy requests.</p>
-
-<h2>Terms of Service</h2>
-<p>This digital guide is for educational reference only. It is NOT veterinary medical advice. Always consult a licensed veterinarian for animal health emergencies. By purchasing, you agree this information cannot replace professional vet care. No refunds will be offered once digital content access has been unlocked, as the product is instantly available upon purchase.</p>
-
-<p><strong>Support Email:</strong> nbazen@gmail.com</p>
-<p>Last updated: September 2026</p>
-        <!-- Footer -->
-        <footer class="site-footer">
-            <div class="footer-inner">
-                <h3>ManualAid</h3>
-                <div class="disclaimer">
-                    <strong>Important Disclaimer:</strong> The ManualAid website is for general educational and reference purposes only and does not constitute veterinary or medical advice. The information provided is not a substitute for professional veterinary diagnosis, treatment, or care. Always consult a licensed veterinarian regarding any medical condition or concern about your pet. In the event of a life-threatening emergency, contact an emergency veterinary clinic immediately. ManualAid is not responsible for any actions taken based on the content of this website.
-                </div>
+    <section class="product-section">
+        <h2 class="section-title">Our Products</h2>
+        <div class="product-grid">
+            <!-- Resume模板产品卡片 -->
+            <div class="product-card">
+                <h3>Resume & Cover Letter Template Pack</h3>
+                <p>100 editable Word resume and cover letter templates for multiple job roles. Customize for your own job applications.</p>
+                <div class="price">$3.90</div>
+                <a href="https://resume.manualaid.com">View Product</a>
             </div>
-        </footer>
+
+            <!-- 【以后新增产品在这里复制粘贴新卡片示例】
+            <div class="product-card">
+                <h3>NEW PRODUCT NAME</h3>
+                <p>Short description of your new digital template pack.</p>
+                <div class="price">$3.90</div>
+                <a href="https://xxx.manualaid.com">View Product</a>
+            </div>
+            -->
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <h3>What will I get after purchase?</h3>
+            <p>You receive downloadable digital files. Once payment is confirmed, you get instant access to download your templates.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Can I edit these templates?</h3>
+            <p>All templates are editable in Microsoft Word. You can modify text, colors and layout for your personal use.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Refund policy</h3>
+            <p>This is digital downloadable content. Refunds are only available if the product cannot be delivered permanently.</p>
+        </div>
+    </section>
+
+    <div class="disclaimer">
+        <strong>Disclaimer:</strong> All templates are formatting tools only. We do not guarantee any specific results from using these files. All products are for personal use only.
     </div>
+
+    <footer>
+        <p>© 2026 ManualAid. All rights reserved.</p>
+        <p>
+            <a href="/privacy-policy.html">Privacy Policy</a>
+            <a href="/terms-of-service.html">Terms of Service</a>
+        </p>
+    </footer>
+</div>
 </body>
 </html>
